@@ -80,7 +80,7 @@ function App() {
               pokemon={pokemon}
               key={pokemon.id}
               onSelect={(pokemon) => selectedItemSet(pokemon)}
-              isSelected={pokemon.id == selectedItem.id}
+              isSelected={selectedItem && pokemon.id === selectedItem.id}
             />
           ))}
       </div>
