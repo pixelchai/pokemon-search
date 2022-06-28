@@ -2,10 +2,13 @@ import React from "react";
 import "./App.css";
 import pokemon from "./pokemon.json";
 
-const PokemonRow = ({ pokemon }) => (
+const PokemonRow = ({ pokemon, onSelect }) => (
   <tr>
     <td>{pokemon.name.english}</td>
     <td>{pokemon.type.join(", ")}</td>
+    <td>
+      <button onClick={() => onSelect(pokemon)}>Select!</button>
+    </td>
   </tr>
 );
 
@@ -50,12 +53,16 @@ function App() {
               )
               .slice(0, 20)
               .map((pokemon) => (
-                <PokemonRow pokemon={pokemon} key={pokemon.id} />
+                <PokemonRow
+                  pokemon={pokemon}
+                  key={pokemon.id}
+                  onSelect={(pokemon) => selectedItemSet(pokemon)}
+                />
               ))}
           </tbody>
         </table>
       </div>
-      {selectedItem && <h1>selectedItem.name.english</h1>}
+      {selectedItem && <h1>{selectedItem.name.english}</h1>}
     </div>
   );
 }
