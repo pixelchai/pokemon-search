@@ -14,20 +14,28 @@ const PokemonRow = ({ pokemon, onSelect }) => (
   </tr>
 );
 
-const PokemonInfo = ({ name, base }) => {
+const PokemonInfo = ({ name, base, id }) => {
   let otherNames = Object.keys(name).filter((k) => k !== DEFAULT_LANG);
   return (
-    <div className="pokemon-info">
-      <div className="name">{name[DEFAULT_LANG]}</div>
-      <div className="other-names">
-        {otherNames.map((key, index) => (
-          <span className="other-name">
-            {name[key]} ({key})
-            {index < otherNames.length - 1 && (
-              <span className="separator">・</span>
-            )}
-          </span>
-        ))}
+    <div className="pokemon-info box">
+      <div
+        className="sprite"
+        style={{
+          backgroundImage: `url(https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png)`,
+        }}
+      ></div>
+      <div className="name-holder">
+        <div className="name">{name[DEFAULT_LANG]}</div>
+        <div className="other-names">
+          {otherNames.map((key, index) => (
+            <span className="other-name">
+              {name[key]} ({key})
+              {index < otherNames.length - 1 && (
+                <span className="separator">・</span>
+              )}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -45,13 +53,16 @@ function App() {
         paddingTop: "1rem",
       }}
     >
-      <h1 className="title">Pokemon Search</h1>
-      <input
-        value={searchValue}
-        onChange={(e) => searchValueSet(e.target.value)}
-      />
+      <div className="top-box box">
+        <h1 className="title">Pokemon Search</h1>
+        <input
+          value={searchValue}
+          onChange={(e) => searchValueSet(e.target.value)}
+        />
+      </div>
 
       <div
+        className="search-results box"
         style={{
           display: "grid",
           gridTemplateColumns: "70% 30%",
