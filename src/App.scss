@@ -1,0 +1,43 @@
+#root {
+  padding: 1rem;
+}
+
+.title {
+  text-align: center;
+}
+
+th {
+  text-align: left;
+  font-size: 1rem;
+}
+
+input {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.3rem;
+  box-sizing: border-box;
+}
+
+.pokemon-info {
+  background-color: #f9f9f9;
+  padding: .5rem 1rem;
+  margin: .5rem 0;
+
+  .name {
+    font-weight: bold;
+    font-size: 2rem;
+  }
+
+  .other-names {
+    color: gray;
+    font-style: italic;
+
+    .other-name {
+      text-transform: capitalize;
+
+      .separator {
+        margin: .2rem;
+      }
+    }
+  }
+}

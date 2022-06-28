@@ -1,6 +1,8 @@
 import React from "react";
-import "./App.css";
+import "./App.scss";
 import pokemon from "./pokemon.json";
+
+const DEFAULT_LANG = "english";
 
 const PokemonRow = ({ pokemon, onSelect }) => (
   <tr>
@@ -11,6 +13,25 @@ const PokemonRow = ({ pokemon, onSelect }) => (
     </td>
   </tr>
 );
+
+const PokemonInfo = ({ name, base }) => {
+  let otherNames = Object.keys(name).filter((k) => k !== DEFAULT_LANG);
+  return (
+    <div className="pokemon-info">
+      <div className="name">{name[DEFAULT_LANG]}</div>
+      <div className="other-names">
+        {otherNames.map((key, index) => (
+          <span className="other-name">
+            {name[key]} ({key})
+            {index < otherNames.length - 1 && (
+              <span className="separator">・</span>
+            )}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 function App() {
   const [searchValue, searchValueSet] = React.useState("");
@@ -62,7 +83,7 @@ function App() {
           </tbody>
         </table>
       </div>
-      {selectedItem && <h1>{selectedItem.name.english}</h1>}
+      {selectedItem && <PokemonInfo {...selectedItem} />}
     </div>
   );
 }
