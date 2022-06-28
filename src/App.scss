@@ -1,20 +1,61 @@
+$radius: 5px;
+
 #root {
   padding: 1rem;
 }
 
 .box {
-  // box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  // box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  // box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  border-radius: 5px;
-  padding: .5rem 1rem;
-  margin: .5rem 0;
-
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  border-radius: $radius;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
 }
 
 .search-results {
-  // margin: 1rem 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+
+  .result-row {
+    display: table;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.3rem 1rem;
+
+    &-header {
+      font-weight: bold;
+      background-color: #222;
+      color: white;
+      padding-top: 0.6rem;
+      padding-bottom: 0.4rem;
+    }
+
+    &-entry {
+
+      &:hover,
+      &.selected {
+        background-color: #e3e3e3;
+      }
+    }
+
+    div {
+      width: 50%;
+      display: table-cell;
+    }
+
+    &:first-child {
+      border-top-left-radius: $radius;
+      border-top-right-radius: $radius;
+      // padding-top: .6rem;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: $radius;
+      border-bottom-right-radius: $radius;
+      // padding-bottom: .6rem;
+    }
+  }
 }
 
 .top-box {
@@ -49,7 +90,6 @@ input {
   .sprite {
     width: 80px;
     background-position: center;
-    // zoom: 1.5;
     margin: 0.2rem 0.4rem 0.2rem 0;
     image-rendering: pixelated;
   }
@@ -70,7 +110,7 @@ input {
         text-transform: capitalize;
 
         .separator {
-          margin: .2rem;
+          margin: 0.2rem;
         }
       }
     }

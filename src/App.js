@@ -4,14 +4,16 @@ import pokemon from "./pokemon.json";
 
 const DEFAULT_LANG = "english";
 
-const PokemonRow = ({ pokemon, onSelect }) => (
-  <tr>
-    <td>{pokemon.name.english}</td>
-    <td>{pokemon.type.join(", ")}</td>
-    <td>
-      <button onClick={() => onSelect(pokemon)}>Select!</button>
-    </td>
-  </tr>
+const PokemonRow = ({ pokemon, onSelect, isSelected }) => (
+  <div
+    className={`result-row result-row-entry ${
+      (isSelected && "selected") || ""
+    }`}
+    onMouseDown={() => onSelect(pokemon)}
+  >
+    <div>{pokemon.name[DEFAULT_LANG]}</div>
+    <div>{pokemon.type.join(", ")}</div>
+  </div>
 );
 
 const PokemonInfo = ({ name, base, id }) => {
@@ -61,38 +63,26 @@ function App() {
         />
       </div>
 
-      <div
-        className="search-results box"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "70% 30%",
-          gridColumnGap: "1rem",
-        }}
-      >
-        <table width="100%">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            {pokemon
-              .filter((pokemon) =>
-                pokemon.name.english
-                  .toLowerCase()
-                  .includes(searchValue.toLocaleLowerCase())
-              )
-              .slice(0, 20)
-              .map((pokemon) => (
-                <PokemonRow
-                  pokemon={pokemon}
-                  key={pokemon.id}
-                  onSelect={(pokemon) => selectedItemSet(pokemon)}
-                />
-              ))}
-          </tbody>
-        </table>
+      <div className="search-results box">
+        <div className="result-row result-row-header">
+          <div>Name</div>
+          <div>Type</div>
+        </div>
+        {pokemon
+          .filter((pokemon) =>
+            pokemon.name[DEFAULT_LANG].toLowerCase().includes(
+              searchValue.toLocaleLowerCase()
+            )
+          )
+          .slice(0, 20)
+          .map((pokemon) => (
+            <PokemonRow
+              pokemon={pokemon}
+              key={pokemon.id}
+              onSelect={(pokemon) => selectedItemSet(pokemon)}
+              isSelected={pokemon.id == selectedItem.id}
+            />
+          ))}
       </div>
       {selectedItem && <PokemonInfo {...selectedItem} />}
     </div>
